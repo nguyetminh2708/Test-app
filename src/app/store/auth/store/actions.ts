@@ -1,4 +1,3 @@
-import {IUserRole} from '@/features/auth/types';
 import * as actionTypes from './actionTypes';
 
 export const logout = () => {
@@ -28,7 +27,7 @@ export const setVerify = (isVerify: boolean) => {
   };
 };
 
-export const setRole = (role: IUserRole) => {
+export const setRole = (role: string[]) => {
   return {
     type: actionTypes.SET_ROLE,
     role,

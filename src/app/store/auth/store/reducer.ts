@@ -1,13 +1,13 @@
-import {getUserInfo} from '@/features/auth/authUtils';
-import {IUserInfo, IUserRole} from '@/features/auth/types';
-import {produce} from 'immer';
+import { getUserInfo } from '@/features/auth/authUtils';
+import { IUserInfo, IUserRole } from '@/features/auth/types';
+import { produce } from 'immer';
 import * as actionTypes from './actionTypes';
 export interface IAuthState {
   accessToken: string;
   user?: IUserInfo;
   isVerify: boolean;
   isLoading: boolean;
-  role: IUserRole & {checked: boolean};
+  role: IUserRole & { checked: boolean };
   isExpiredPackage: boolean;
 }
 export const initialState: IAuthState = {
@@ -15,20 +15,12 @@ export const initialState: IAuthState = {
   user: undefined,
   isVerify: false,
   isLoading: false,
-  role: {
-    isKitchen: false,
-    isCashier: false,
-    checked: false,
-    isViewReservation: false,
-    isEditReservation: false,
-    isCreateReservation: false,
-    isCancelReservation: false,
-  },
+  role: [],
   isExpiredPackage: false,
 };
 
 export const reducer = (preState = initialState, action: any) =>
-  produce(preState, draft => {
+  produce(preState, (draft) => {
     switch (action.type) {
       case actionTypes.SET_START_LOADING: {
         draft.isLoading = action?.isLoading;
@@ -38,15 +30,7 @@ export const reducer = (preState = initialState, action: any) =>
         draft.accessToken = '';
         draft.isVerify = false;
         draft.user = undefined;
-        draft.role = {
-          isKitchen: false,
-          isCashier: false,
-          checked: false,
-          isViewReservation: false,
-          isEditReservation: false,
-          isCreateReservation: false,
-          isCancelReservation: false,
-        };
+        draft.role = [];
         break;
       }
 
@@ -57,7 +41,7 @@ export const reducer = (preState = initialState, action: any) =>
         break;
       }
       case actionTypes.SET_VERIFY: {
-        const {isVerify = false} = action;
+        const { isVerify = false } = action;
         draft.isVerify = isVerify;
         break;
       }
@@ -97,7 +81,7 @@ export const reducer = (preState = initialState, action: any) =>
         break;
       }
       case actionTypes.SET_ROLE: {
-        const {role}: {role: IUserRole} = action || {
+        const { role }: { role: IUserRole } = action || {
           role: {
             isKitchen: false,
             isCashier: false,
@@ -107,11 +91,11 @@ export const reducer = (preState = initialState, action: any) =>
             isCancelReservation: false,
           },
         };
-        draft.role = {...role, checked: true};
+        draft.role = { ...role, checked: true };
         break;
       }
       case actionTypes.SET_IS_EXPIRED_PACKAGE: {
-        const {isExpiredPackage} = action;
+        const { isExpiredPackage } = action;
         draft.isExpiredPackage = isExpiredPackage;
         break;
       }
