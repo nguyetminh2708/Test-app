@@ -1,0 +1,44 @@
+.page-login {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  width: calc(100vw - 450px);
+  
+  @media only screen and (max-width: 376px) {
+    .page-login-form-wrapper {
+      width: 100%;
+    }
+  }
+  &-form-wrapper {
+    position: absolute;
+    width: 450px;
+    @media only screen and (max-width: 415px)
+    {
+      width: 100%;
+    }
+    right: 0;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #fff;
+  }
+
+  &-branding {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  &-title {
+    text-transform: uppercase;
+  }
+
+  &-form-container {
+    flex: 3;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+}

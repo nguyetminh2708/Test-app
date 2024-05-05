@@ -1,0 +1,41 @@
+import {IAreaListState} from '@/features/areaTable/store/reducer';
+import {IAuthState} from '@/features/auth/store/reducer';
+import {ICartState} from '@/features/cart/store/reducer';
+import {IFeeState} from '@/features/fee/store/reducer';
+import {IInventoryState} from '@/features/inventory/inventorySlice';
+import {IKitchenState} from '@/features/kitchen/store/reducer';
+import {INotificationListState} from '@/features/notification/store/reducer';
+import {IOrderState} from '@/features/order/orderSlice';
+import {IOrderManagementState} from '@/features/order/store/order-management/reducer';
+import {IComboDetailState} from '@/features/product/store/combo-detail/reducer';
+import {IProductDetailState} from '@/features/product/store/product-detail/reducer';
+import {IProductListState} from '@/features/product/store/product-list/reducer';
+import {IReserveTableListState} from '@/features/reserve-table/store/reducer';
+import {IAppState} from '@/features/system/store/app/reducer';
+import {IProgressingState} from '@/features/system/store/progressing/reducer';
+import {IPrintState} from '@/features/print/store/reducer';
+import {ILoginState} from '@/features/login/store/reducer';
+import {IRootState} from '@/features/system/store/root/reducer';
+import {IProductManagementState} from '@/features/product/store/product-management/reducer';
+
+export interface IStore {
+  progressing: IProgressingState;
+  root: IRootState;
+  app: IAppState;
+  auth: IAuthState;
+  productList: IProductListState;
+  productManagement: IProductManagementState;
+  productDetail: IProductDetailState;
+  comboDetail: IComboDetailState;
+  orderManagement: IOrderManagementState;
+  print: IPrintState;
+  cart: ICartState;
+  inventory: IInventoryState;
+  fees: IFeeState;
+  order: IOrderState;
+  kitchen: IKitchenState;
+  areaList: IAreaListState;
+  notificationList: INotificationListState;
+  reserveTableList: IReserveTableListState;
+  login: ILoginState;
+}
