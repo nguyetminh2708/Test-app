@@ -1,3 +1,4 @@
+export {};
 // import * as areaListDispatch from '@/features/areaTable/store';
 // import * as session from '@/features/auth/store';
 // import * as cartDispatch from '@/features/cart/store';
