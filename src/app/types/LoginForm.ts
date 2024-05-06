@@ -1,6 +1,7 @@
 export interface ILoginForm {
   userName: string;
   password: string;
+  accessToken: string;
 }
 
 type OAuthTokenProvider = 'Microsoft';

@@ -2,12 +2,11 @@ import { createContext, useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import jwtdecode from 'jwt-decode';
 import { ACCESS_TOKEN_KEY } from '../common/constants';
+import { IUserClaims } from '../types/user';
 
 const NameClaim = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name';
 const NameIdentifier = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier';
 const RoleClaim = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
-
-export type UserRole = 'admin' | 'user' | 'capg';
 
 interface IJwtToken {
   aud: string;
@@ -19,15 +18,6 @@ interface IJwtToken {
   jti: string;
   nbf: number;
   sub: string;
-}
-
-interface IUserClaims {
-  fullName: string;
-  userName?: string;
-  email?: string;
-  id: string | number;
-  roles: UserRole[];
-  isAdmin: boolean;
 }
 
 interface IAuthContext {
@@ -44,6 +34,7 @@ interface IProps {
 export const AuthContext = createContext<IAuthContext>(null);
 
 export const AuthContextProvider = ({ children }: IProps) => {
+  //To do context
   const [state, setState] = useState<IAuthContext>(null);
   const history = useHistory();
   const logOut = useCallback(() => {

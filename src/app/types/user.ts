@@ -33,3 +33,14 @@ export interface RoleResponse {
 export interface ChangePasswordModel {
   newPassword: string;
 }
+
+export type UserRole = 'admin' | 'user' | 'capg';
+
+export interface IUserClaims {
+  fullName: string;
+  userName?: string;
+  email?: string;
+  id: string | number;
+  roles: UserRole[];
+  isAdmin: boolean;
+}

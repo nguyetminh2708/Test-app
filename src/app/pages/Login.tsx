@@ -1,4 +1,4 @@
-import { Form, Input, Button, notification } from 'antd';
+import { Form, Input, Button, notification, Radio } from 'antd';
 import { useHistory } from 'react-router';
 import { login } from '../apis/authClient';
 import { ACCESS_TOKEN_KEY } from '../common/constants';
@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { useMsal } from '@azure/msal-react';
 import { loginRequest } from '../common/authConfig';
 import { ErrorBox } from '../components/ErrorBox';
+import { useAppStore } from '../store/zustand/useAppStore';
+import * as session from '../store/redux/auth';
 
 const { Title } = Typography;
 
@@ -16,13 +18,23 @@ export const Login = () => {
   const history = useHistory();
   const [hasError, setHasError] = useState<Response>();
   const { instance } = useMsal();
+  const setUserZustand = useAppStore((state) => state.setUserZustand);
 
   const onFinish = async (values: ILoginForm) => {
     try {
       //const { accessToken } = await login(values);
       const accessToken = 'test';
       localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+      //To do context
+      //trong context có đoạn useEffect theo condition (có thay đổi history hoặc logOut)
+      //history.push sẽ trigger cái này
       history.push('/dashboard');
+
+      //To do zustand
+      setUserZustand(values);
+
+      //To do redux
+      session.setAccessToken(values.accessToken);
     } catch (err) {
       setHasError(err);
     }
@@ -78,13 +90,26 @@ export const Login = () => {
               </Title>
               <ErrorBox error={hasError} />
             </Form.Item>
-
-            <Form.Item name="userName" rules={[{ required: true, message: 'Please input your username!' }]}>
+            <Form.Item
+              label="userName"
+              name="userName"
+              rules={[{ required: true, message: 'Please input your username!' }]}
+            >
               <Input size="large" placeholder="User Name" />
             </Form.Item>
-
-            <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+            <Form.Item
+              label="password"
+              name="password"
+              rules={[{ required: true, message: 'Please input your password!' }]}
+            >
               <Input.Password size="large" placeholder="Password" />
+            </Form.Item>
+            <Form.Item
+              label="Random test as access token"
+              name="accessToken"
+              rules={[{ required: true, message: 'Please input your accessToken!' }]}
+            >
+              <Input.Password size="large" placeholder="accessToken" />
             </Form.Item>
             <Form.Item>
               <Button size="large" type="primary" htmlType="submit" style={{ width: '100%' }}>

@@ -4,10 +4,21 @@ import CaretDownOutlined from '@ant-design/icons/lib/icons/CaretDownOutlined';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { nameAbbreviation } from '../../utils/stringUtils';
+import { useAppStore } from '../../store/zustand/useAppStore';
 
 export const AvatarAndUser = () => {
   const { user, logOut } = useContext(AuthContext);
+  const clearUserZustand = useAppStore((state) => state.clearUserZustand);
 
+  const funLogOut = () => {
+    try {
+      //To do zustand
+      clearUserZustand();
+
+      //To do context
+      logOut();
+    } catch (err) {}
+  };
   const menu = (
     <Menu>
       <Menu.Item>
